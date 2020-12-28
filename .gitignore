@@ -1,0 +1,5 @@
+node_modules
+gulp-build
+public/dist
+js-lib
+/vendor/

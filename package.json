@@ -1,0 +1,36 @@
+{
+  "name": "php-framework-laminas",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ngulik-yt/laminas.git"
+  },
+  "author": "him",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ngulik-yt/laminas/issues"
+  },
+  "homepage": "https://github.com/ngulik-yt/laminas#readme",
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-append-prepend": "^1.0.8",
+    "gulp-autoprefixer": "^7.0.1",
+    "gulp-beautify": "^3.0.0",
+    "gulp-clean": "^0.4.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-imagemin": "^7.1.0",
+    "gulp-less": "^4.0.1",
+    "gulp-rename": "^2.0.0",
+    "gulp-replace": "^1.0.0",
+    "gulp-run": "^1.7.1",
+    "gulp-sass": "^4.1.0",
+    "gulp-scss": "^1.4.0",
+    "gulp-sourcemaps": "^3.0.0",
+    "gulp-uglify": "^3.0.2",
+    "node-less": "^1.0.0"
+  }
+}

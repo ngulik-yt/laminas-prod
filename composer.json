@@ -1,0 +1,32 @@
+{
+    "name": "him/php-framework-laminas",
+    "type": "project",
+    "authors": [{
+        "name": "Fikri Rohim",
+        "email": "rohimfikri@gmail.com"
+    }],
+    "minimum-stability": "dev",
+    "repositories": [{
+        "type": "composer",
+        "url": "https://asset-packagist.org"
+    }],
+    "require": {
+        "oomphinc/composer-installers-extender": "dev-master",
+        "bower-asset/jquery": "^3.5",
+        "npm-asset/jquery": "^3.5"
+    },
+    "extra": {
+        "installer-types": [
+            "bower-asset",
+            "npm-asset"
+        ],
+        "installer-paths": {
+            "js-lib/bower/{$name}": [
+                "type:bower-asset"
+            ],
+            "js-lib/npm/{$name}": [
+                "type:npm-asset"
+            ]
+        }
+    }
+}
