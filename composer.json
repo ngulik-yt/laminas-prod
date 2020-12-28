@@ -6,6 +6,7 @@
         "email": "rohimfikri@gmail.com"
     }],
     "minimum-stability": "dev",
+    "prefer-stable": true,
     "repositories": [{
         "type": "composer",
         "url": "https://asset-packagist.org"
@@ -13,7 +14,19 @@
     "require": {
         "oomphinc/composer-installers-extender": "dev-master",
         "bower-asset/jquery": "^3.5",
-        "npm-asset/jquery": "^3.5"
+        "npm-asset/jquery": "^3.5",
+        "voku/anti-xss": "^4.1",
+        "voku/html-min": "^4.4",
+        "catfan/medoo": "^1.7",
+        "alirdn/secureupload": "dev-master",
+        "phpoffice/phpspreadsheet": "^1.15",
+        "fzaninotto/faker": "^1.9",
+        "php": "^7.3",
+        "mpdf/mpdf": "^8.0",
+        "kint-php/kint-js": "^2.0"
+    },
+    "require-dev": {
+        "kint-php/kint": "^3.3"
     },
     "extra": {
         "installer-types": [
@@ -28,5 +41,24 @@
                 "type:npm-asset"
             ]
         }
+    },
+    "autoload-dev": {
+        "psr-4": {
+        }
+    },
+    "scripts": {
+        "cs-check": "phpcs",
+        "cs-fix": "phpcbf",
+        "development-disable": "laminas-development-mode disable",
+        "development-enable": "laminas-development-mode enable",
+        "development-status": "laminas-development-mode status",
+        "post-create-project-cmd": [
+            "@development-enable",
+            "php -r 'if (file_exists(\"src/remove-package-artifacts.php\")) include \"src/remove-package-artifacts.php\";'",
+            "php -r 'if (file_exists(\"CHANGELOG.md\")) unlink(\"CHANGELOG.md\");'",
+            "php bin/update-gitignore.php"
+        ],
+        "serve": "php -S 0.0.0.0:8080 -t public/ public/index.php",
+        "test": "phpunit"
     }
 }
