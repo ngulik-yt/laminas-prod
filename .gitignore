@@ -1,5 +1,7 @@
 node_modules
 gulp-build
 public/dist
+public/bower
 js-lib
+php-build
 /vendor/

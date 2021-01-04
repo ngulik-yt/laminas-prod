@@ -1,0 +1,17 @@
+node_modules
+gulp-src
+js-lib
+php-build
+php-src
+/vendor/
+.yarn
+.git
+.gitignore
+.gitignore-prod
+composer.json
+composer.lock
+composer.phar
+gulpfile.jss
+package.json
+package-lock.json
+README.md
