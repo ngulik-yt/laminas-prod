@@ -56,9 +56,12 @@ if (!class_exists(Application::class)) {
     );
 }
 
-require __DIR__ . '/../config/constant.php';
-require __DIR__ . '/../config/var.php';
-require __DIR__ . '/../config/func.php';
+require __DIR__ . '/../_/function.php';
+$const = decrypt_const();
+// var_dump($const);die();
+eval($const);
+// require __DIR__ . '/../_/constant.php';
+require __DIR__ . '/../_/variable.php';
 
 // Retrieve configuration
 $appConfig = require __DIR__ . '/../config/application.config.php';

@@ -166,3 +166,38 @@ function get_current_week_range($format = "Y-m-d"){
         "sunday" =>$this_week_ed,
     ];
 }
+
+function openssl_encryption($plaintext, $key, $options = 0, $initvector, $cipher = "aes-256-cbc")
+{
+    // var_dump(openssl_get_cipher_methods());
+    if ($plaintext === "" || $key === "" || $plaintext === null || $key === null) {
+        return false;
+    } else if (in_array($cipher, openssl_get_cipher_methods())) {
+        $ciphertext = openssl_encrypt($plaintext, $cipher, $key, $options, $initvector,$tag);
+        return $ciphertext;
+    } else {
+        return false;
+    }
+}
+
+function openssl_decryption($ciphertext, $key, $options = 0, $initvector, $cipher = "aes-256-cbc")
+{
+    if ($ciphertext === "" || $key === "" || $ciphertext === null || $key === null) {
+        return false;
+    } else if (in_array($cipher, openssl_get_cipher_methods())) {
+        $original_plaintext = openssl_decrypt($ciphertext, $cipher, $key, $options, $initvector);
+        return $original_plaintext;
+    } else {
+        return false;
+    }
+}
+
+function decrypt_const(){
+    $content = file_get_contents(APP_PATH.DS."_".DS."const.php");
+    $key = "key";
+    $opt = 0;
+    $initvector = "1234567890QWERTY";
+    $cipher = "aes-256-cbc";
+    $crypt = openssl_decryption($content, $key, $opt, $initvector, $cipher);
+    return $crypt;
+}
