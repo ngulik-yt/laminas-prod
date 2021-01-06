@@ -1,0 +1,75 @@
+<?php
+/**
+ * @var Laminas\View\Renderer\PhpRenderer $me
+ */
+ $me = $this;
+?>
+<?php
+$user = [
+    'id'=>'',
+    'full_name'=>'Guest',
+    'username'=>'guest',
+    'pos_name'=>'Guest',
+    'bu_code'=>'',
+    'bulvl_name'=>'',
+];
+$user = isset($me->identity()['id']) ? $me->identity() : $user;
+//!d($user,$me->vars);
+
+/** @var \Core\Helper\View\DarkAdmin $darkAdmin */
+$darkAdmin = $me->DarkAdmin();
+$darkAdmin->setIdentity($user);
+$darkAdmin->setVars($me->vars['_vars_']);
+$sidemenus = $darkAdmin->renderSidebarMenu();
+
+/** @var \Laminas\View\Helper\HeadStyle $headStyle */
+$headStyle = $me->headStyle();
+$headStyle->captureStart();
+?>
+
+<?php
+$headStyle->captureEnd();
+?>
+<!-- Sidebar Header-->
+<div class="sidebar-header d-flex align-items-center">
+    <div class="avatar" style="margin: auto;text-align: center;vertical-align: middle">
+        <!--img src="<?= $me->basePath("vendor/dark_admin/img/avatar-6.jpg"); ?>" alt="..."
+             class="img-fluid rounded-circle"-->
+        <span class="img-fluid rounded-circle text-danger"><i class="fa fa-user" style="font-size: 45px"></i></span>
+    </div>
+    <div class="title w-75 ml-2">
+        <h1 class="h6 text-danger"><?= $user['full_name']; ?></h1>
+        <p><?= $user['pos_name']; ?></p>
+        <p class="font-weight-bold"><?= $user['bu_code']===""?"":$user['bu_code']." ".$user['bulvl_name']; ?></p>
+    </div>
+</div>
+<!-- Sidebar Navidation Menus-->
+<?php
+echo $sidemenus;
+/*
+?>
+<span class="heading">Main</span>
+<ul class="list-unstyled">
+    <li class="active"><a href="index.html"> <i class="icon-home"></i>Home </a></li>
+    <li><a href="tables.html"> <i class="icon-grid"></i>Tables </a></li>
+    <li><a href="charts.html"> <i class="fa fa-bar-chart"></i>Charts </a></li>
+    <li><a href="forms.html"> <i class="icon-padnote"></i>Forms </a></li>
+    <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i
+                class="icon-windows"></i>Example dropdown </a>
+        <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
+            <li><a href="#">Page</a></li>
+            <li><a href="#">Page</a></li>
+            <li><a href="#">Page</a></li>
+        </ul>
+    </li>
+    <li><a href="login.html"> <i class="icon-logout"></i>Login page </a></li>
+</ul>
+<span class="heading">Extras</span>
+<ul class="list-unstyled">
+    <li> <a href="#"> <i class="icon-settings"></i>Demo </a></li>
+    <li> <a href="#"> <i class="icon-writing-whiteboard"></i>Demo </a></li>
+    <li> <a href="#"> <i class="icon-chart"></i>Demo </a></li>
+</ul>
+<?php
+*/
+?>

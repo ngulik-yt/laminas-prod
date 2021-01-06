@@ -1,0 +1,1 @@
+{"App\\Controller\\AdminController":"Core\\Factory\\MainFactory","App\\Controller\\AuthController":"Core\\Factory\\MainFactory","Shinergy\\Controller\\IndexController":"Core\\Factory\\MainFactory","Workflow\\Controller\\IndexController":"Core\\Factory\\MainFactory"}

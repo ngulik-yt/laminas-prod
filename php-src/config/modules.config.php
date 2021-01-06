@@ -32,6 +32,5 @@ return [
     'Laminas\Router',
     'Laminas\Validator',
     'Laminas\Diactoros',
-    'Core',
-    'App'
+    'Core'
 ];

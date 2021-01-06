@@ -43,7 +43,10 @@
         "laminas/laminas-mail": "^2.12",
         "laminas/laminas-serializer": "^2.9",
         "laminas/laminas-xml2json": "^3.1",
-        "laminas/laminas-paginator": "^2.9"
+        "laminas/laminas-paginator": "^2.9",
+        "laminas/laminas-development-mode": "^3.3",
+        "bower-asset/numeral": "^2.0",
+        "bower-asset/jquery-migrate": "^3.0"
     },
     "require-dev": {
         "kint-php/kint": "^3.3",
@@ -63,15 +66,33 @@
             ]
         }
     },
+    "autoload": {
+        "psr-4": {
+            "Core\\": "module/Core/src/"
+        }
+    },
     "autoload-dev": {
         "psr-4": {
+            "Core\\": "php-src/module/Core/src/"
         }
     },
     "scripts": {
         "cs-check": "phpcs",
         "cs-fix": "phpcbf",
-        "development-disable": "laminas-development-mode disable",
-        "development-enable": "laminas-development-mode enable",
+        "development-disable": [
+            "IF EXIST views RMDIR /Q/S views > NUL",
+            "IF EXIST module RMDIR /Q/S module > NUL",
+            "gulp php",
+            "laminas-development-mode disable",
+            "composer dump-autoload"
+        ],
+        "development-enable": [
+            "IF EXIST _module RMDIR /Q/S _module > NUL",
+            "php -r \"if(file_exists('module')) rename('module','_module');\"",
+            "IF EXIST module RMDIR /Q/S module > NUL",
+            "laminas-development-mode enable",
+            "composer dump-autoload"
+        ],
         "development-status": "laminas-development-mode status",
         "post-create-project-cmd": [
             "@development-enable",

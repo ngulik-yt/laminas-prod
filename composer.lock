@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2a357f5ac89eb6f91698461c774d2e3e",
+    "content-hash": "82447c5d13d5c37d77f966f332b62512",
     "packages": [
         {
             "name": "alirdn/secureupload",
@@ -74,6 +74,36 @@
             "license": [
                 "MIT"
             ]
+        },
+        {
+            "name": "bower-asset/jquery-migrate",
+            "version": "3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/appleboy/jquery-migrate.git",
+                "reference": "ba224c3e6bd8a90f72fddacf34e02bc2472d5a0f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/appleboy/jquery-migrate/zipball/ba224c3e6bd8a90f72fddacf34e02bc2472d5a0f",
+                "reference": "ba224c3e6bd8a90f72fddacf34e02bc2472d5a0f"
+            },
+            "type": "bower-asset"
+        },
+        {
+            "name": "bower-asset/numeral",
+            "version": "2.0.6",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:adamwdraper/Numeral-js.git",
+                "reference": "7de892ffb438af6e63b9c4f6aff0c9bc3932f09f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/adamwdraper/Numeral-js/zipball/7de892ffb438af6e63b9c4f6aff0c9bc3932f09f",
+                "reference": "7de892ffb438af6e63b9c4f6aff0c9bc3932f09f"
+            },
+            "type": "bower-asset"
         },
         {
             "name": "brick/varexporter",
@@ -2032,6 +2062,59 @@
                 "source": "https://github.com/laminas/laminas-db"
             },
             "time": "2020-03-29T12:08:51+00:00"
+        },
+        {
+            "name": "laminas/laminas-development-mode",
+            "version": "3.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laminas/laminas-development-mode.git",
+                "reference": "11b2adc8837e4419a5b31e2a7ae59f06636d4096"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laminas/laminas-development-mode/zipball/11b2adc8837e4419a5b31e2a7ae59f06636d4096",
+                "reference": "11b2adc8837e4419a5b31e2a7ae59f06636d4096",
+                "shasum": ""
+            },
+            "require": {
+                "laminas/laminas-zendframework-bridge": "^1.0",
+                "php": "^7.3 || ~8.0.0"
+            },
+            "replace": {
+                "zfcampus/zf-development-mode": "^3.2.0"
+            },
+            "require-dev": {
+                "laminas/laminas-coding-standard": "~1.0.0",
+                "mikey179/vfsstream": "^1.6.5",
+                "phpunit/phpunit": "^9.3"
+            },
+            "bin": [
+                "bin/laminas-development-mode"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Laminas\\DevelopmentMode\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Laminas development mode script",
+            "homepage": "https://laminas.dev",
+            "keywords": [
+                "framework",
+                "laminas"
+            ],
+            "funding": [
+                {
+                    "url": "https://funding.communitybridge.org/projects/laminas-project",
+                    "type": "community_bridge"
+                }
+            ],
+            "time": "2020-12-16T22:26:52+00:00"
         },
         {
             "name": "laminas/laminas-di",

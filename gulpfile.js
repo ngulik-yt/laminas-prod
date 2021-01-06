@@ -14,6 +14,8 @@ const through2 = require('through2');
 const UglifyPHP = require('uglify-php');
 let UglifyPHP_opt = {
   "excludes": [
+    '$max_depth',
+    '$enabled_mode',
     '$GLOBALS',
      '$_SERVER',
      '$_GET',
@@ -30,7 +32,7 @@ let UglifyPHP_opt = {
      '$argv',
      '$this',
      '$CSP',
-     '$VPORT',
+    '$VPORT'
   ],
   "minify": {
      "replace_variables": true,
@@ -77,12 +79,13 @@ task('phpProcess', series('phpMinify:import', 'phpMinify:run'));
 
 function phtmlProcess(cb) {
   return src('php-src/**/*.phtml')
-    .pipe(htmlmin({ collapseWhitespace: true, ignoreCustomFragments: [/<\?[\s\S]*?(?:\?>|$)/] }))
+    .pipe(htmlmin({ collapseWhitespace: true, ignoreCustomFragments: [/<\?[\s\S]*?(?:\?>|$)/,/<%[\s\S]*?%>/, /<\?[\s\S]*?\?>/, /<\?[=|php]?[\s\S]*?\?>/], removeComments: true }))
     .pipe(dest('php-build'));
 }
 
 function uglifyPhp(cb) {
   return src(['php-build/**/*.php','php-build/**/*.phtml'])
+  // return src(['php-build/**/test.phtml'])
     // Instead of using gulp-uglify, you can create an inline plugin
     .pipe(through2.obj(function(file, _, cb) {
       if (file.isBuffer()) {
@@ -135,42 +138,56 @@ function jsProcess(cb) {
 function publishJs(cb) {
   return src('gulp-build/js/**/*.min.js')
     // .pipe(clean({force: true}))
-    .pipe(dest('public/dist/js/'));
+    .pipe(dest('public/dist/js/'))
+    .pipe(dest('php-src/public/dist/js/'));
 }
 
 function publishCss(cb) {
   return src('gulp-build/css/**/*.min.css')
-    .pipe(dest('public/dist/css/'));
+    .pipe(dest('public/dist/css/'))
+    .pipe(dest('php-src/public/dist/css/'));
 }
 
 function publishImage(cb) {
   return src('gulp-build/img/**/*')
-    .pipe(dest('public/dist/img/'));
+    .pipe(dest('public/dist/img/'))
+    .pipe(dest('php-src/public/img/js/'));
 }
 
 function publishBowerJs(cb) {
   return src('js-lib/bower/**/*.js')
-    .pipe(dest('public/bower/'));
+    .pipe(dest('public/bower/'))
+    .pipe(dest('php-src/public/bower/'));
 }
 
 function publishBowerCss(cb) {
   return src('js-lib/bower/**/*.css')
-    .pipe(dest('public/bower/'));
+  .pipe(dest('public/bower/'))
+  .pipe(dest('php-src/public/bower/'));
 }
 
 function publishBowerJpg(cb) {
   return src('js-lib/bower/**/*.jpg')
-    .pipe(dest('public/bower/'));
+  .pipe(dest('public/bower/'))
+  .pipe(dest('php-src/public/bower/'));
 }
 
 function publishBowerJpeg(cb) {
   return src('js-lib/bower/**/*.jpeg')
-    .pipe(dest('public/bower/'));
+  .pipe(dest('public/bower/'))
+  .pipe(dest('php-src/public/bower/'));
 }
 
 function publishBowerPng(cb) {
   return src('js-lib/bower/**/*.png')
-    .pipe(dest('public/bower/'));
+  .pipe(dest('public/bower/'))
+  .pipe(dest('php-src/public/bower/'));
+}
+
+function publishBowerGif(cb) {
+  return src('js-lib/bower/**/*.gif')
+  .pipe(dest('public/bower/'))
+  .pipe(dest('php-src/public/bower/'));
 }
 
 function publishPhp(cb) {
@@ -208,7 +225,8 @@ exports.bower = series(
     publishBowerCss,
     publishBowerJpg,
     publishBowerJpeg,
-    publishBowerPng
+    publishBowerPng,
+    publishBowerGif
   )
 );
 

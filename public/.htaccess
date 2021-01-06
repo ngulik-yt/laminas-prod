@@ -37,8 +37,8 @@ RewriteRule ^.*$ - [NC,L]
 # as well, providing a safe, one-size fits all solution.
 RewriteCond %{REQUEST_URI}::$1 ^(/.+)/(.*)::\2$
 RewriteRule ^(.*) - [E=BASE:%1]
-#RewriteRule ^(.*)$ %{ENV:BASE}/index.php [L]
-RewriteRule ^(.*)$ %{ENV:BASE}index.php [NC,L]
+#RewriteRule ^(.*)$ %{ENV:BASE}/app.php [L]
+RewriteRule ^(.*)$ %{ENV:BASE}/app.php [NC,L]
 
 <Limit POST GET PUT DELETE PATCH>
     Require all granted

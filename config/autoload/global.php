@@ -1,1 +1,1 @@
-<?php  Kint::$kjkb7rvg=10;Kint::$kjkb7rvh=_DEBUG_;return[];
+<?php  Kint::$max_depth=10;Kint::$enabled_mode=_DEBUG_;return[];

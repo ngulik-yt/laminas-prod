@@ -1,0 +1,59 @@
+<?php
+/**
+ * @var Laminas\View\Renderer\PhpRenderer $me
+ */
+ $me = $this;
+?>
+<section class="content-header">
+    <?php 
+    // !d($me->vars); 
+    $_vars = $me->vars['_vars_'];
+    $_routeparam = $_vars['route_param'];
+
+    $showtitle = $_vars['show_title'] ?? false;
+    if(!$showtitle)$showtitle = $_routeparam['show_title'] ?? false;
+    $title = $_vars['title'] ?? "";
+    if($title==="")$title = $_routeparam['title'] ?? "";
+    
+    $showbreadcrumb = $_vars['show_breadcrumb'] ?? false;
+    $breadcrumb = $_vars['breadcrumb'] ?? [];
+
+    if($showtitle || $showbreadcrumb){
+    ?>
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-7">
+                    <?php
+                    if($showtitle){
+                    ?>
+                        <h1 class="font-weight-bolder"><?= $title; ?></h1>
+                    <?php
+                    }
+                    ?>
+                </div>
+                <div class="col-sm-5">
+                    <?php
+                    if($showbreadcrumb){
+                    ?>
+                        <ol class="breadcrumb float-sm-right">
+                            <?php
+                                foreach($breadcrumb as $v){
+                                    $class = $v['class'] ?? [];
+                                    $link = $v['link'] ?? "#";
+                                    $label = $v['label'] ?? "";
+                            ?>
+                                <li class="breadcrumb-item <?= implode(" ",$class); ?>"><a href="<?= $link; ?>"><?= $label; ?></a></li>
+                            <?php
+                                }
+                            ?>
+                        </ol>
+                    <?php
+                    }
+                    ?>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    <?php
+    }
+    ?>
+</section>

@@ -11,7 +11,6 @@ define("_COPY_LINK_", "https://tma.web.id");
 define("_APP_NAME_", "My App");
 define("_APP_ALIAS_", "MYAPP");
 define("_DEFAULT_THEME_", "blank");
-define("_DEBUG_", true);
 define("_BYPASS_", true);
 
 define("_USE_LAMINAS_LOADER_", false);
@@ -53,3 +52,26 @@ define("_REMEMBER_ME_", (60 * 60 * 24 * 30));
 // define("_COOKIE_LIFETIME_",999999999);
 // define("_GCMAX_LIFETIME_",999999999);
 // define("_REMEMBER_ME_",999999999);
+
+//DB Constant
+//ADMIN
+define("_DBADMIN_DRIVER_", "Pdo_Mysql");
+define("_DBADMIN_HOST_", "localhost");
+define("_DBADMIN_USER_", "lam-sys");
+define("_DBADMIN_PASSWORD_", "l4m_5y5");
+define("_DBADMIN_NAME_", "laminas_sys");
+define("_DBADMIN_PORT_", 3306);
+//SYS
+define("_DBSYS_DRIVER_", "Pdo_Mysql");
+define("_DBSYS_HOST_", "localhost");
+define("_DBSYS_USER_", "lam-sys");
+define("_DBSYS_PASSWORD_", "l4m_5y5");
+define("_DBSYS_NAME_", "laminas_sys");
+define("_DBSYS_PORT_", 3306);
+//APP
+define("_DBAPP_DRIVER_", "Pdo_Mysql");
+define("_DBAPP_HOST_", "localhost");
+define("_DBAPP_USER_", "lam-app");
+define("_DBAPP_PASSWORD_", "l4m_4pp");
+define("_DBAPP_NAME_", "laminas_app");
+define("_DBAPP_PORT_", 3306);

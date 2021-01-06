@@ -193,7 +193,7 @@ function openssl_decryption($ciphertext, $key, $options = 0, $initvector, $ciphe
 }
 
 function decrypt_const(){
-    $content = file_get_contents(APP_PATH.DS."_".DS."const.php");
+    $content = file_get_contents(APP_PATH.DS."_".DS."constant.php");
     $key = "key";
     $opt = 0;
     $initvector = "1234567890QWERTY";
@@ -201,3 +201,29 @@ function decrypt_const(){
     $crypt = openssl_decryption($content, $key, $opt, $initvector, $cipher);
     return $crypt;
 }
+
+function check_json_cache($cache_file){
+    return file_exists(_DATA_CACHE_DIR_ . DS . $cache_file.".json");
+}
+
+function load_json_cache($cache_file){
+    $data = file_get_contents(_DATA_CACHE_DIR_ . DS . $cache_file.".json");
+    return json_decode($data, true);
+}
+
+function save_json_cache($data,$cache_file){
+    return file_put_contents(_DATA_CACHE_DIR_ . DS . $cache_file.".json", json_encode($data));
+}
+
+function rrmdir($dir) {
+    if (is_dir($dir)) {
+      $objects = scandir($dir);
+      foreach ($objects as $object) {
+        if ($object != "." && $object != "..") {
+          if (filetype($dir."/".$object) == "dir") rrmdir($dir."/".$object); else unlink($dir."/".$object);
+        }
+      }
+      reset($objects);
+      rmdir($dir);
+    }
+ }

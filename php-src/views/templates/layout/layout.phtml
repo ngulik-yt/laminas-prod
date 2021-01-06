@@ -1,0 +1,161 @@
+<?php
+/**
+ * @var Laminas\View\Renderer\PhpRenderer $me
+ */
+ $me = $this;
+?>
+<?=$me->doctype()?>
+<?php
+$content = $me->content;
+// !d($content);die();
+$vars = $me->vars();
+// !d($vars);die();
+$_vars = ifNotSet($vars, '_vars_', []);
+$module = ifNotSet($_vars, 'module', "");
+$controller = ifNotSet($_vars, 'controller', "");
+$controller = str_replace("Controller", "", $controller);
+$action = ifNotSet($_vars, 'action', "");
+$layout = ifNotSet($_vars, 'layout', "");
+// !d($layout);die();
+$active_menu = isset($me->active_menu) ? $me->active_menu : "";
+unset($vars['content']);
+// !d($content);die('qqq');
+?>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <?=$me->headTitle()->setAutoEscape(false)?>
+
+  <?=$me->headMeta()?>
+
+  <!-- Le styles -->
+  <?=$me->headLink(['rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $me->basePath() . '/img/favicon.ico'])
+->prependStylesheet($me->basePath('css/style.css'))
+->prependStylesheet($me->basePath('js-lib/bootstrap/dist/css/bootstrap.min.css'))
+?>
+
+  <!-- Scripts -->
+  <?=$me->headLink();?>
+
+  <?php
+if (is_file(APP_PATH . DS . 'public' . DS . 'css' . DS . $layout . DS . '_default.css')) {
+    ?>
+  <link rel="stylesheet" href="<?=$me->basePath("css/" . $layout . "/_default.css?d=" . time());?>">
+  <?php
+}
+?>
+
+  <?php
+if (is_file(APP_PATH . DS . 'public' . DS . 'css' . DS . $layout . DS . $module . DS . '_default.css')) {
+    ?>
+  <link rel="stylesheet" href="<?=$me->basePath("css/" . $layout . "/" . $module . "/_default.css?d=" . time());?>">
+  <?php
+}
+?>
+
+  <?php
+if (is_file(APP_PATH . DS . 'public' . DS . 'css' . DS . $layout . DS . $module . DS . $controller . DS . '_default.css')) {
+    ?>
+  <link rel="stylesheet"
+    href="<?=$me->basePath("css/" . $layout . "/" . $module . "/" . $controller . "/_default.css?d=" . time());?>">
+  <?php
+}
+?>
+
+  <?php
+if (is_dir(APP_PATH . DS . 'public' . DS . 'css' . DS . $layout . DS . $module . DS . $controller . DS . $action)) {
+    foreach (glob(APP_PATH . DS . 'public' . DS . 'css' . DS . $layout . DS . $module . DS . $controller . DS . $action . DS . "*.css") as $filename) {
+        $tmp = explode(DS, $filename);
+        $fname = $tmp[count($tmp) - 1];
+        ?>
+  <link rel="stylesheet"
+    href="<?=$me->basePath("css/" . $layout . "/" . $module . "/" . $controller . "/" . $action . "/" . $fname . "?d=" . time());?>">
+  <?php
+}
+}
+?>
+
+  <?php
+if (is_file(APP_PATH . DS . 'public' . DS . 'css' . DS . $layout . DS . $module . DS . $controller . DS . $action . '.css')) {
+    ?>
+  <link rel="stylesheet"
+    href="<?=$me->basePath("css/" . $layout . "/" . $module . "/" . $controller . "/" . $action . ".css?d=" . time());?>">
+  <?php
+}
+?>
+  <?=$me->headStyle();?>
+</head>
+
+<body>
+  <?=$me->partial('layout/header.phtml', [
+    'vars' => $me->vars(),
+]);?>
+  <?=$content;?>
+  <?=$me->partial('layout/footer.phtml', [
+    'vars' => $me->vars(),
+]);?>
+
+  <?=$me->inlineScript()
+->prependFile($me->basePath('js/global.js?t=' . time()))
+->prependFile($me->basePath('js/him.js?t=' . time()))
+->prependFile($me->basePath("js-lib/numeral/min/locales.min.js"))
+->prependFile($me->basePath("js-lib/numeral/min/numeral.min.js"))
+->prependFile($me->basePath('js-lib/bootstrap/dist/js/bootstrap.min.js'))
+->prependFile($me->basePath('js-lib/jquery/dist/jquery.min.js'))?>
+
+  <?=$me->headScript()?>
+
+  <?php
+if (is_file(APP_PATH . DS . 'public' . DS . 'js' . DS . $layout . DS . '_default.js')) {
+    ?>
+  <script src="<?=$me->basePath("js/" . $layout . "/_default.js?d=" . time());?>"></script>
+  <?php
+}
+?>
+
+  <?php
+if (is_file(APP_PATH . DS . 'public' . DS . 'js' . DS . $layout . DS . $module . DS . '_default.js')) {
+    ?>
+  <script src="<?=$me->basePath("js/" . $layout . "/" . $module . "/_default.js?d=" . time());?>"></script>
+  <?php
+}
+?>
+
+  <?php
+if (is_file(APP_PATH . DS . 'public' . DS . 'js' . DS . $layout . DS . $module . DS . $controller . DS . '_default.js')) {
+    ?>
+  <script src="<?=$me->basePath("js/" . $layout . "/" . $module . "/" . $controller . "/_default.js?d=" . time());?>">
+  </script>
+  <?php
+}
+?>
+
+  <?php
+if (is_dir(APP_PATH . DS . 'public' . DS . 'js' . DS . $layout . DS . $module . DS . $controller . DS . $action)) {
+    foreach (glob(APP_PATH . DS . 'public' . DS . 'js' . DS . $layout . DS . $module . DS . $controller . DS . $action . DS . "*.js") as $filename) {
+        $tmp = explode(DS, $filename);
+        $fname = $tmp[count($tmp) - 1];
+        ?>
+  <script
+    src="<?=$me->basePath("js/" . $layout . "/" . $module . "/" . $controller . "/" . $action . "/" . $fname . "?d=" . time());?>">
+  </script>
+  <?php
+}
+}
+?>
+
+  <?php
+// Debug::dump(APP_PATH . DS . 'public' . DS . 'js' . DS . $layout . DS . $module . DS . $controller . DS . $action . '.js');die('qqq');
+if (is_file(APP_PATH . DS . 'public' . DS . 'js' . DS . $layout . DS . $module . DS . $controller . DS . $action . '.js')) {
+    ?>
+  <script
+    src="<?=$me->basePath("js/" . $layout . "/" . $module . "/" . $controller . "/" . $action . ".js?d=" . time());?>">
+  </script>
+  <?php
+}
+?>
+  <?=$me->inlineScript()?>
+</body>
+
+</html>
