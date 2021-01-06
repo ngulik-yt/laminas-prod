@@ -1,9 +1,11 @@
 node_modules
+/_module/
+/_views/
+/gulp-src/
 /gulp-build/
-/public/dist/
-/public/bower/
 /js-lib/
 /php-build/
+/php-src/
 /vendor/
 /data/cache/**/**
 !/data/cache/**/
@@ -13,3 +15,7 @@ node_modules
 !/data/sample/
 /data/session/**
 !/data/session/
+.gitignore-dev
+composer.phar
+package.json
+package-lock.json
